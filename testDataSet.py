@@ -1,4 +1,5 @@
 import random
+import json
 from faker import Faker
 from faker.providers import BaseProvider
 
@@ -45,3 +46,32 @@ for i in range(0,5):
 	print(fake.random_int(min=7, max=15)) #price
 	print(fake.foodCode()) #foodID
 	print("--------------------------------------------")
+
+
+#Dumping JSON data in a text file
+data={}
+data['Cid']=fake.CustomerCode()
+data['order_id']=fake.random_int(min=1, max=12)
+#orderDate=fake.date()
+#orderTime=fake.time()
+data['date']=fake.date()
+data['time']=fake.time()
+data['qty']=fake.random_digit_not_null()
+data['price']=fake.random_int(min=7, max=15)
+data['food_id']=fake.foodCode()
+
+json_data = json.dumps(data)
+fo = open("data_in_json.json","wb")
+fo.write(json_data)
+fo.close();
+
+'''
+
+
+data = {}
+data['name'] = 'Chetna'
+json_data = json.dumps(data)
+fo = open("data_in_json.json","wb")
+fo.write(json_data)
+fo.close();
+'''
