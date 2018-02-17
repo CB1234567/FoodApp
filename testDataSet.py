@@ -9,9 +9,7 @@ Cid - C001 to C003
 order_id - same as below
 date
 time 
-
 SEPARATE DATE AND TIME COLUMNS IN BOTH TABLES
-
 ORDERS TABLE
 order_id - 001 to 012 right now but is 6 characters long
 ---> fake.random_int(min=0, max=9999)
@@ -20,7 +18,6 @@ order_time - time()
 qty - random_digit_not_null() 
 price - 
 food_id - localisation F001...
-
 '''
 fake=Faker()
 
@@ -36,6 +33,8 @@ class FoodProvider(BaseProvider):
 fake.add_provider(FoodProvider)
 # print(fake.foodCode())
 # print(fake.CustomerCode())
+
+'''
 for i in range(0,5):
 	print(fake.CustomerCode()) #cid
 	print(fake.random_int(min=1, max=12)) #orderID
@@ -46,32 +45,23 @@ for i in range(0,5):
 	print(fake.random_int(min=7, max=15)) #price
 	print(fake.foodCode()) #foodID
 	print("--------------------------------------------")
-
+'''
 
 #Dumping JSON data in a text file
 data={}
-data['Cid']=fake.CustomerCode()
-data['order_id']=fake.random_int(min=1, max=12)
-#orderDate=fake.date()
-#orderTime=fake.time()
-data['date']=fake.date()
-data['time']=fake.time()
-data['qty']=fake.random_digit_not_null()
-data['price']=fake.random_int(min=7, max=15)
-data['food_id']=fake.foodCode()
+fo = open("data_in_json.json","w")
+for i in range(0,5):
+	data['Cid']=fake.CustomerCode()
+	data['order_id']=fake.random_int(min=1, max=12)
+	#orderDate=fake.date()
+	#orderTime=fake.time()
+	data['date']=fake.date()
+	data['time']=fake.time()
+	data['qty']=fake.random_digit_not_null()
+	data['price']=fake.random_int(min=7, max=15)
+	data['food_id']=fake.foodCode()
 
-json_data = json.dumps(data)
-fo = open("data_in_json.json","wb")
-fo.write(json_data)
+	json_data = json.dumps(data)
+
+	fo.write(json_data)
 fo.close();
-
-'''
-
-
-data = {}
-data['name'] = 'Chetna'
-json_data = json.dumps(data)
-fo = open("data_in_json.json","wb")
-fo.write(json_data)
-fo.close();
-'''
