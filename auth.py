@@ -22,24 +22,23 @@ fake.add_provider(FoodProvider)
 
 #Dumping JSON data in a text file
 data={}
-#data['Auth']=[]
+result=[]
 
 fo = open("data_in_auth.json","w")
-for i in range(0,10):
+for i in range(0,9):
 	Cid='%s'%(fake.CustomerCode())
 	while(Cid in PreviousCustomers):
 		Cid='%s'%(fake.CustomerCode())
-	data['Cid']=Cid
+	#data['Cid']=Cid
 	PreviousCustomers.append(Cid)
 
 	email="'%s'"%(fake.email())
 	password="'%s'"%(fake.password())
 	#data['Cid']=Cid
-	data['email']=email
-	data['password']=password
-	#data['Auth'].append({'Cid': Cid, 'email': email, 'passowrd': password})
-	json_data = json.dumps(data)
+	#data['email']=email
+	#data['password']=password
+	result.append({'Cid': Cid, 'email': email, 'password': password})
+json_data = json.dumps(result)
 
-	fo.write(json_data)
+fo.write(json_data)
 fo.close();
-
